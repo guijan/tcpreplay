@@ -1,6 +1,7 @@
 language: c
 
 os: linux
+dist: trusty
 
 arch:
   - amd64
