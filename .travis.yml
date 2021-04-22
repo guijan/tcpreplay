@@ -1,15 +1,11 @@
-sudo: required
-
 language: c
 
 os: linux
-dist: trusty
 
 arch:
   - amd64
   - arm64
   - ppc64le
-
 
 addons:
   apt:
@@ -18,7 +14,7 @@ addons:
     - clang
     - libpcap-dev
 
-matrix:
+jobs:
   include:
     - compiler: gcc
     - compiler: clang
@@ -29,4 +25,4 @@ script:
   - ${CI_BUILD_PREFIX} ./configure --enable-local-libopts > build.log 2>&1 || (cat build.log && exit 1)
   - ${CI_BUILD_PREFIX} make > build.log 2>&1 || (cat build.log && exit 1)
   - make dist > build.log 2>&1 || (cat build.log && exit 1)
-  - sudo make test || (cat test/test.log && exit 1)
+  - make test || (cat test/test.log && exit 1)
