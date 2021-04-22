@@ -8,18 +8,16 @@ arch:
   - arm64
   - ppc64le
 
-matrix:
-  - compiler: gcc
-  - compiler: clang
-    env: CI_BUILD_PREFIX=scan-build
+compiler:
+  - clang
+  - gcc
 
 addons:
   apt:
     packages:
-    - autogen
-    - clang
-    - libpcap-dev
-
+      - autogen
+      - clang
+      - libpcap-dev
 
 script:
   - autoreconf -iv > build.log 2>&1 || (cat build.log && exit 1)
