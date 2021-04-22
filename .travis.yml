@@ -7,6 +7,11 @@ arch:
   - arm64
   - ppc64le
 
+matrix:
+  - compiler: gcc
+  - compiler: clang
+    env: CI_BUILD_PREFIX=scan-build
+
 addons:
   apt:
     packages:
@@ -14,11 +19,6 @@ addons:
     - clang
     - libpcap-dev
 
-jobs:
-  include:
-    - compiler: gcc
-    - compiler: clang
-      env: CI_BUILD_PREFIX=scan-build
 
 script:
   - autoreconf -iv > build.log 2>&1 || (cat build.log && exit 1)
